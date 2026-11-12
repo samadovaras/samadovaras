@@ -1,3 +1,14 @@
+
+## 🛠️ Technologies I'm Learning
+
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=python,html,css,git,github,vscode" />
+</p>
+
+## 📊 My GitHub Journey
+
+I'm currently learning programming and building my skills step by step.
+
 # 
 # Hi, I'm Araz Samadov 👋
 
