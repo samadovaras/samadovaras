@@ -1,58 +1,167 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calculator</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f6f8; display: flex; justify-content: center; padding: 30px 15px; }
-    .calc { width: 300px; background: #fff; padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
-    #screen { width: 100%; box-sizing: border-box; font-size: 28px; text-align: right; padding: 12px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 8px; }
-    .keys { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-    button { font-size: 20px; padding: 16px 0; border: none; border-radius: 8px; background: #e6e9ed; cursor: pointer; }
-    button.op { background: #0a66c2; color: #fff; }
-    button.eq { background: #2e9e4f; color: #fff; }
-    button.clr { background: #d9534f; color: #fff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARAS Calculator</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #10131c;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.calculator {
+    width: 340px;
+    padding: 25px;
+    background: #1c2230;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px #0008;
+}
+
+h2 {
+    text-align: center;
+    letter-spacing: 3px;
+    color: #55d6be;
+}
+
+#display {
+    width: 100%;
+    height: 75px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    background: #10131c;
+    color: white;
+    font-size: 30px;
+    text-align: right;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    height: 60px;
+    border: none;
+    border-radius: 12px;
+    background: #30394b;
+    color: white;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+button:active {
+    transform: scale(0.94);
+}
+
+.operator {
+    background: #176b68;
+}
+
+.clear {
+    background: #bd4545;
+}
+
+.equal {
+    background: #55bfa9;
+    color: #10131c;
+}
+
+</style>
 </head>
+
 <body>
-  <div class="calc">
-    <input id="screen" readonly value="0">
-    <div class="keys">
-      <button class="clr" onclick="clearAll()">C</button>
-      <button onclick="back()">⌫</button>
-      <button class="op" onclick="add('/')">÷</button>
-      <button class="op" onclick="add('*')">×</button>
-      <button onclick="add('7')">7</button>
-      <button onclick="add('8')">8</button>
-      <button onclick="add('9')">9</button>
-      <button class="op" onclick="add('-')">−</button>
-      <button onclick="add('4')">4</button>
-      <button onclick="add('5')">5</button>
-      <button onclick="add('6')">6</button>
-      <button class="op" onclick="add('+')">+</button>
-      <button onclick="add('1')">1</button>
-      <button onclick="add('2')">2</button>
-      <button onclick="add('3')">3</button>
-      <button class="eq" onclick="calc()" style="grid-row: span 2">=</button>
-      <button onclick="add('0')" style="grid-column: span 2">0</button>
-      <button onclick="add('.')">.</button>
+
+<div class="calculator">
+    <h2>ARAS CALCULATOR</h2>
+
+    <input id="display" value="0" readonly>
+
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button onclick="deleteLast()">⌫</button>
+        <button class="operator" onclick="add('%')">%</button>
+        <button class="operator" onclick="add('/')">÷</button>
+
+        <button onclick="add('7')">7</button>
+        <button onclick="add('8')">8</button>
+        <button onclick="add('9')">9</button>
+        <button class="operator" onclick="add('*')">×</button>
+
+        <button onclick="add('4')">4</button>
+        <button onclick="add('5')">5</button>
+        <button onclick="add('6')">6</button>
+        <button class="operator" onclick="add('-')">−</button>
+
+        <button onclick="add('1')">1</button>
+        <button onclick="add('2')">2</button>
+        <button onclick="add('3')">3</button>
+        <button class="operator" onclick="add('+')">+</button>
+
+        <button onclick="add('0')">0</button>
+        <button onclick="add('.')">.</button>
+        <button class="equal" onclick="calculate()">=</button>
     </div>
-  </div>
-  <script>
-    const screen = document.getElementById('screen');
-    let expr = '';
-    function show() { screen.value = expr || '0'; }
-    function add(c) { expr += c; show(); }
-    function clearAll() { expr = ''; show(); }
-    function back() { expr = expr.slice(0, -1); show(); }
-    function calc() {
-      try {
-        const r = Function('"use strict"; return (' + expr + ')')();
-        expr = String(r);
-      } catch (e) { expr = ''; screen.value = 'Error'; return; }
-      show();
+</div>
+
+<script>
+let display = document.getElementById("display");
+let expression = "";
+
+function add(value) {
+    if (display.value === "Error") {
+        expression = "";
     }
-  </script>
+
+    expression += value;
+    display.value = expression;
+}
+
+function clearDisplay() {
+    expression = "";
+    display.value = "0";
+}
+
+function deleteLast() {
+    expression = expression.slice(0, -1);
+    display.value = expression || "0";
+}
+
+function calculate() {
+    try {
+        if (!/^[0-9+\-*/%.() ]+$/.test(expression)) {
+            throw new Error();
+        }
+
+        let result = Function('"use strict"; return (' + expression + ')')();
+
+        if (!Number.isFinite(result)) {
+            throw new Error();
+        }
+
+        expression = String(Number(result.toFixed(10)));
+        display.value = expression;
+    } catch {
+        expression = "";
+        display.value = "Error";
+    }
+}
+</script>
+
 </body>
 </html>
