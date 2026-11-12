@@ -1,15 +1,30 @@
+# 
 # Hi, I'm Araz Samadov 👋
 
-I'm from Azerbaijan. I am learning web development and building my first projects.
+🇦🇿 I'm from Azerbaijan.
 
-## Languages
-- Turkish (good)
-- Russian (intermediate)
-- English (learning)
+💻 Aspiring Software Developer
 
-## Currently
-- Learning GitHub and web basics
-- Building my personal portfolio
+🌱 Currently learning:
+- Python
+- HTML
+- CSS
+- Git & GitHub
 
-## Contact
-- GitHub: samadovaras
+🎯 My Goals:
+- Become a professional developer
+- Build real-world projects
+- Improve my programming skills every day
+
+🛠️ My Skills:
+- Python (Learning)
+- HTML (Learning)
+- GitHub (Learning)
+
+📫 Languages:
+- Azerbaijani
+- Turkish
+- Russian
+- English
+
+**"Every expert was once a beginner."**
